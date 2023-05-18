@@ -1,2 +1,2 @@
-﻿/CanteenServiceDatabaseServer/grpcServer/bin/
-bin/*
+﻿bin
+obj
