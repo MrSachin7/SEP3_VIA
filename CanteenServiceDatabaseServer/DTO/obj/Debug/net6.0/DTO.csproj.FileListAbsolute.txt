@@ -1,0 +1,12 @@
+C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\bin\Debug\net6.0\DTO.deps.json
+C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\bin\Debug\net6.0\DTO.dll
+C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\bin\Debug\net6.0\ref\DTO.dll
+C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\bin\Debug\net6.0\DTO.pdb
+C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\obj\Debug\net6.0\DTO.csproj.AssemblyReference.cache
+C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\obj\Debug\net6.0\DTO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\obj\Debug\net6.0\DTO.AssemblyInfoInputs.cache
+C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\obj\Debug\net6.0\DTO.AssemblyInfo.cs
+C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\obj\Debug\net6.0\DTO.csproj.CoreCompileInputs.cache
+C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\obj\Debug\net6.0\DTO.dll
+C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\obj\Debug\net6.0\ref\DTO.dll
+C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\obj\Debug\net6.0\DTO.pdb
