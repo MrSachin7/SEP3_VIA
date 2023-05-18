@@ -30,8 +30,6 @@ public class UserController {
     @ResponseBody
     public ResponseEntity getUser(@PathVariable String username) {
         try {
-            System.out.println("username = " + username);
-
             UserDTO userFromServer = userService.getUserByUsername(username);
             return ResponseEntity.ok(userFromServer);
         } catch (Exception e) {
