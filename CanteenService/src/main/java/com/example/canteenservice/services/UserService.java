@@ -1,7 +1,7 @@
 package com.example.canteenservice.services;
 
 import com.example.canteenservice.dto.UserDTO;
-import com.example.canteenservice.grpcClient.UserClient;
+import com.example.canteenservice.grpc.UserClient;
 import org.springframework.stereotype.Service;
 
 @Service

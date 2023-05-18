@@ -1,37 +1,25 @@
-package com.example.canteenservice.grpcClient;
-
-
+package com.example.canteenservice.grpc;
 import grpcProtoFiles.UserServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+@Component
+@Scope(value = "singleton")
 public class GrpcStubFactory {
-    private static ManagedChannel managedChannel;
-    private static final Lock lock = new ReentrantLock();
+    private  ManagedChannel managedChannel;
+    private  UserServiceGrpc.UserServiceBlockingStub userServiceBlockingStub;
 
-    private static UserServiceGrpc.UserServiceBlockingStub userServiceBlockingStub;
-
-
-    private GrpcStubFactory() {
-    }
-
-    public static ManagedChannel getManagedChannel() {
+    public ManagedChannel getManagedChannel() {
         if (managedChannel == null) {
-            synchronized (lock) {
-                if (managedChannel == null) {
-                    managedChannel = ManagedChannelBuilder.forAddress("localhost", 9090)
-                            .usePlaintext()
-                            .build();
-                }
-            }
+            managedChannel = ManagedChannelBuilder.forAddress("localhost", 9090)
+                    .usePlaintext()
+                    .build();
         }
         return managedChannel;
     }
 
-    public static UserServiceGrpc.UserServiceBlockingStub getUserServiceBlockingStub(){
+    public UserServiceGrpc.UserServiceBlockingStub getUserServiceBlockingStub() {
         if (userServiceBlockingStub == null) {
             userServiceBlockingStub = UserServiceGrpc.newBlockingStub(getManagedChannel());
         }

@@ -1,8 +1,7 @@
-package com.example.canteenservice.grpcClient;
+package com.example.canteenservice.grpc;
 
 import com.example.canteenservice.dto.UserDTO;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.ApplicationScope;
 
 @Service
 public interface UserClient {
