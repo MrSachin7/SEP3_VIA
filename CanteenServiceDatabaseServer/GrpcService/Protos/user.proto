@@ -18,7 +18,7 @@ message CreateUserResponse {
 }
 
 message GetUserByUsernameRequest {
-  Username username = 1;
+  string username = 1;
 }
 
 message GetUserByUsernameResponse {
@@ -32,8 +32,4 @@ message User {
   string  lastName = 4;
   string role = 5;
   string telephone = 6;
-}
-
-message Username {
-  string userName = 1;
 }

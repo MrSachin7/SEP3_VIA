@@ -12,7 +12,7 @@ public class GrpcStubFactory {
 
     public ManagedChannel getManagedChannel() {
         if (managedChannel == null) {
-            managedChannel = ManagedChannelBuilder.forAddress("localhost", 9090)
+            managedChannel = ManagedChannelBuilder.forAddress("localhost", 5081)
                     .usePlaintext()
                     .build();
         }

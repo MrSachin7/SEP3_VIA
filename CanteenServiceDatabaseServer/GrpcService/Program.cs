@@ -19,6 +19,7 @@ builder.Services.AddScoped<IUserService, UserServiceImpl>();
 builder.Services.AddScoped<MenuConverter>();
 builder.Services.AddScoped<ReservationConverter>();
 builder.Services.AddScoped<UserConverter>();
+builder.Services.AddScoped<GrpcService.converters.UserConverter>();
 
 var app = builder.Build();
 

@@ -9,6 +9,6 @@ public class MenuEntity {
     public string Name { get; set; }
     public string? Description { get; set; }
     public double Price{ get; set; }
-    public List<IngredientNameEntity>? Ingredients { get; set; }
+    public List<IngredientEntity>? Ingredients { get; set; }
 
 }

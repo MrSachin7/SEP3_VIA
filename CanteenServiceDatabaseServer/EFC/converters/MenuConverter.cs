@@ -11,7 +11,7 @@ public class MenuConverter {
             Description = menu.Description,
             Price = menu.Price,
             // If menu.Ingredients is null, then return an empty list, otherwise return a list of strings mapped from the IngredientEntities
-            Ingredients = menu.Ingredients == null ? new List<string>() : menu.Ingredients.Select(i => i.Ingredient).ToList()
+            Ingredients = menu.Ingredients == null ? new List<string>() : menu.Ingredients.Select(i => i.IngredientName).ToList()
         };
     }
 
@@ -22,7 +22,7 @@ public class MenuConverter {
             Description = menu.Description,
             Price = menu.Price,
             // If menu.Ingredients is null, then return an empty list, otherwise return a list of IngredientEntities created from the strings
-            Ingredients =menu.Ingredients == null ? new List<IngredientNameEntity>() : menu.Ingredients.Select(ingredientString => new IngredientNameEntity(){Ingredient = ingredientString}).ToList()
+            Ingredients =menu.Ingredients == null ? new List<IngredientEntity>() : menu.Ingredients.Select(ingredientString => new IngredientEntity(){IngredientName = ingredientString}).ToList()
         };
     }
 }

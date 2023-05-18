@@ -27,6 +27,10 @@ public class GRPCUserClient implements UserClient {
 
     @Override
     public UserDTO getUserByUsername(String username) {
-        return null;
+        UserOuterClass.GetUserByUsernameRequest request = UserOuterClass.GetUserByUsernameRequest.newBuilder()
+                .setUsername(username).build();
+        UserOuterClass.GetUserByUsernameResponse userByUsername = userServiceBlockingStub.getUserByUsername(request);
+        System.out.println(userConverter.toDto(userByUsername.getUser()));
+        return userConverter.toDto(userByUsername.getUser());
     }
 }

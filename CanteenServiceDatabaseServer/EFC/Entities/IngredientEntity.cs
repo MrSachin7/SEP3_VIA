@@ -2,8 +2,8 @@
 
 namespace EFC.Entities; 
 
-public class IngredientNameEntity {
+public class IngredientEntity {
     [Key]
-    public string Ingredient { get; set; }
+    public string IngredientName { get; set; }
 
 }
