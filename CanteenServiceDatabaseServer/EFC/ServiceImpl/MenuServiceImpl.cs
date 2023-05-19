@@ -23,6 +23,8 @@ public class MenuServiceImpl : IMenuService {
         return _menuConverter.ToDto(addedMenu.Entity);
     }
 
+    // If the ingredient exists the database, we just FK refer to it, 
+    // If it doesnt exist , we create it first.
     private async Task AddIngredientsIfNotExists(MenuEntity menuEntity) {
         List<MenuIngredientEntity>? menuIngredientEntities = menuEntity.MenuIngredients;
         if (menuIngredientEntities == null) return; 
