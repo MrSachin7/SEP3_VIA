@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+option java_package = "grpcProtoFiles";
+
+package menu;
+
+service MenuService {
+  rpc CreateMenu(CreateMenuRequest) returns (CreateMenuResponse);
+  rpc GetMenu(GetMenuRequest) returns (GetMenuResponse);
+  rpc GetAllMenu(GetAllMenuRequest) returns (GetMenusResponse);
+  rpc GetMenuByName(GetMenuByNameRequest) returns (GetMenusResponse);
+}
+message CreateMenuRequest{
+  Menu menu = 1;
+}
+
+message CreateMenuResponse{
+  Menu menu = 1;
+}
+
+message GetMenuRequest{
+  int32 id = 1;
+}
+
+message GetMenuResponse{
+  Menu menu = 1;
+}
+
+message GetAllMenuRequest{
+
+}
+
+message GetMenusResponse{
+  repeated Menu menu = 1;
+}
+
+message GetMenuByNameRequest{
+  string name = 1;
+}
+
+message Menu{
+  int32 id = 1;
+  string name =2;
+  string description = 3;
+  double price = 4;
+  repeated string ingredients = 5;
+}
+

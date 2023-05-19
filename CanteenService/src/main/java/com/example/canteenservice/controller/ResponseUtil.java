@@ -1,0 +1,11 @@
+package com.example.canteenservice.controller;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+public class ResponseUtil {
+
+    public static ResponseEntity internalServerError(Throwable throwable){
+        return new ResponseEntity(throwable.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}

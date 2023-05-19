@@ -2,12 +2,9 @@ package com.example.canteenservice.grpc.converters;
 
 import com.example.canteenservice.dto.UserDTO;
 import grpcProtoFiles.UserOuterClass;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.ApplicationScope;
 
 @Component
-@Scope(value = "singleton")
 public class UserConverter {
 
     public UserDTO toDto(UserOuterClass.User user) {

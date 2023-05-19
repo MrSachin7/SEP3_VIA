@@ -15,25 +15,26 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping(value = "/createUser")
+    @PostMapping(value = "/users")
     public ResponseEntity createUser(@RequestBody UserDTO userDTO) {
         try {
 
             UserDTO addedUser = userService.createUser(userDTO);
             return ResponseEntity.ok(addedUser);
         } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseUtil.internalServerError(e);
         }
     }
 
-    @GetMapping(value = "/user/{username}")
+    @GetMapping(value = "/users/{username}")
     @ResponseBody
     public ResponseEntity getUser(@PathVariable String username) {
         try {
             UserDTO userFromServer = userService.getUserByUsername(username);
             return ResponseEntity.ok(userFromServer);
         } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+            return ResponseUtil.internalServerError(e);
         }
     }
+
 }
