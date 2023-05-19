@@ -12,7 +12,7 @@ public class ReservationConverter {
         this.menuConverter = menuConverter;
     }
 
-    public ReservationDTO ToDTO(ReservationEntity entity) {
+    public ReservationDTO ToDto(ReservationEntity entity) {
         return new ReservationDTO() {
             Id = entity.Id,
             ReservedBy = userConverter.ToDTO(entity.ReservedBy),
@@ -20,6 +20,10 @@ public class ReservationConverter {
             Quantity = entity.Quantity,
             IsDelivered = entity.IsDelivered
         };
+    }
+
+    public List<ReservationDTO> ToDtoList(List<ReservationEntity> entities) {
+        return entities.Select(ToDto).ToList();
     }
 
     public ReservationEntity ToEntity(ReservationDTO dto) {

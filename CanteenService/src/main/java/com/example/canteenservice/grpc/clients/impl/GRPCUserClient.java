@@ -1,7 +1,7 @@
-package com.example.canteenservice.grpc.clients;
+package com.example.canteenservice.grpc.clients.impl;
 import com.example.canteenservice.dto.UserDTO;
 import com.example.canteenservice.grpc.GrpcStubFactory;
-import com.example.canteenservice.grpc.UserClient;
+import com.example.canteenservice.grpc.clients.UserClient;
 import com.example.canteenservice.grpc.converters.UserConverter;
 import grpcProtoFiles.UserOuterClass;
 import grpcProtoFiles.UserServiceGrpc;

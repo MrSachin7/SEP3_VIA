@@ -1,8 +1,8 @@
-package com.example.canteenservice.grpc.clients;
+package com.example.canteenservice.grpc.clients.impl;
 
 import com.example.canteenservice.dto.MenuDTO;
 import com.example.canteenservice.grpc.GrpcStubFactory;
-import com.example.canteenservice.grpc.MenuClient;
+import com.example.canteenservice.grpc.clients.MenuClient;
 import com.example.canteenservice.grpc.converters.MenuConverter;
 import grpcProtoFiles.MenuOuterClass;
 import grpcProtoFiles.MenuServiceGrpc;

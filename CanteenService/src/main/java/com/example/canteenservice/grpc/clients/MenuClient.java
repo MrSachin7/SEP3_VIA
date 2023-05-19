@@ -1,4 +1,4 @@
-package com.example.canteenservice.grpc;
+package com.example.canteenservice.grpc.clients;
 
 import com.example.canteenservice.dto.MenuDTO;
 import org.springframework.stereotype.Service;

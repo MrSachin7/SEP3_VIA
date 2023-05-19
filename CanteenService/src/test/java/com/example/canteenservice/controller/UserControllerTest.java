@@ -1,7 +1,7 @@
 package com.example.canteenservice.controller;
 
 import com.example.canteenservice.dto.UserDTO;
-import com.example.canteenservice.services.UserService;
+import com.example.canteenservice.services.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 @RunWith(SpringRunner.class)
@@ -25,7 +24,7 @@ class UserControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
     private UserDTO mockUserDTO;
 
@@ -41,7 +40,7 @@ class UserControllerTest {
 
     @Test
     void void_shouldReturnUserDTO_whenGetUserByUsername() throws Exception {
-        when(userService.getUserByUsername("testUsername")).thenReturn(mockUserDTO);
+        when(userServiceImpl.getUserByUsername("testUsername")).thenReturn(mockUserDTO);
         // Perform a GET request to /users/1 and validate the response
         mockMvc.perform(MockMvcRequestBuilders.get("/users/testUsername"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -55,7 +54,7 @@ class UserControllerTest {
 
     @Test
     void void_shouldReturnUserDTO_whenCreateUser() throws Exception {
-        when(userService.createUser(any(UserDTO.class))).thenReturn(mockUserDTO);
+        when(userServiceImpl.createUser(any(UserDTO.class))).thenReturn(mockUserDTO);
         // Perform a GET request to /users/1 and validate the response
         mockMvc.perform(MockMvcRequestBuilders.post("/users")
                         .contentType(MediaType.APPLICATION_JSON)

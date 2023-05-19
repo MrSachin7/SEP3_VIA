@@ -1,6 +1,6 @@
 package com.example.canteenservice.controller;
 import com.example.canteenservice.dto.MenuDTO;
-import com.example.canteenservice.services.MenuService;
+import com.example.canteenservice.services.impl.MenuService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -2,7 +2,7 @@ package com.example.canteenservice.controller;
 
 import com.example.canteenservice.dto.UserDTO;
 import com.example.canteenservice.services.UserService;
-import org.springframework.http.HttpStatus;
+import com.example.canteenservice.services.impl.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
