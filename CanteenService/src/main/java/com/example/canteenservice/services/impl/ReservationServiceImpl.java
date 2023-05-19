@@ -1,5 +1,6 @@
 package com.example.canteenservice.services.impl;
 
+import com.example.canteenservice.dto.CreateReservationDTO;
 import com.example.canteenservice.dto.ReservationDTO;
 import com.example.canteenservice.grpc.clients.ReservationClient;
 import com.example.canteenservice.services.ReservationService;
@@ -16,7 +17,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public ReservationDTO createReservation(ReservationDTO reservationDTO) {
+    public ReservationDTO createReservation(CreateReservationDTO reservationDTO) {
         return reservationClient.createReservation(reservationDTO);
     }
 

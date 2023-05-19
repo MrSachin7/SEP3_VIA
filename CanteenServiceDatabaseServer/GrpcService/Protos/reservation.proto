@@ -1,18 +1,20 @@
 ﻿syntax = "proto3";
+
 option csharp_namespace = "grpcProtoFiles";
+
 import "Protos/user.proto";
 import "Protos/menu.proto";
 
 package reservation;
 
 service ReservationService {
-    rpc createReservation(CreateReservationRequest) returns (CreateReservationResponse) {}
-    rpc getReservation(GetReservationRequest) returns (GetReservationResponse) {}
-    rpc getAllReservations(GetAllReservationsRequest) returns (GetAllReservationsResponse) {}
-    rpc getReservationsByUser(GetReservationsByUserRequest) returns (GetReservationsByUserResponse) {}
+    rpc createReservation (CreateReservationRequest) returns (CreateReservationResponse) {}
+    rpc getReservation (GetReservationRequest) returns (GetReservationResponse) {}
+    rpc getAllReservations (GetAllReservationsRequest) returns (GetAllReservationsResponse) {}
+    rpc getReservationsByUser (GetReservationsByUserRequest) returns (GetReservationsByUserResponse) {}
 }
 
-message Reservation{
+message Reservation {
     int32 id = 1;
     user.User reservedBy = 2;
     menu.Menu menu = 3;
@@ -21,33 +23,35 @@ message Reservation{
 }
 
 
-message GetReservationsByUserRequest{
+message GetReservationsByUserRequest {
     string username = 1;
 }
 
-message GetReservationsByUserResponse{
+message GetReservationsByUserResponse {
     repeated Reservation reservations = 1;
 }
 
-message GetAllReservationsRequest{
+message GetAllReservationsRequest {
 }
-message GetAllReservationsResponse{
+message GetAllReservationsResponse {
     repeated Reservation reservations = 1;
 }
 
-message GetReservationRequest{
+message GetReservationRequest {
     int32 id = 1;
 }
 
-message GetReservationResponse{
+message GetReservationResponse {
     Reservation reservation = 1;
 }
 
 message CreateReservationRequest{
-    Reservation reservation = 1;
+    int32 menuId = 1;
+    string reservedByUsername = 2;
+    int32 quantity = 3;
 }
 
-message CreateReservationResponse{
+message CreateReservationResponse {
     Reservation reservation = 1;
 }
 

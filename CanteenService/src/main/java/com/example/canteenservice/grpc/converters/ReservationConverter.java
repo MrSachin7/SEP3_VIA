@@ -1,5 +1,6 @@
 package com.example.canteenservice.grpc.converters;
 
+import com.example.canteenservice.dto.CreateReservationDTO;
 import com.example.canteenservice.dto.ReservationDTO;
 import grpcProtoFiles.ReservationOuterClass;
 import org.springframework.stereotype.Component;
@@ -41,4 +42,5 @@ public class ReservationConverter {
                 .setIsDelivered(reservationDTO.isDelivered())
                 .build();
     }
+
 }

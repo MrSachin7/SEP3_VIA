@@ -1,5 +1,5 @@
 package com.example.canteenservice.grpc.clients.impl;
-
+import com.example.canteenservice.dto.CreateReservationDTO;
 import com.example.canteenservice.dto.ReservationDTO;
 import com.example.canteenservice.grpc.GrpcStubFactory;
 import com.example.canteenservice.grpc.clients.ReservationClient;
@@ -22,10 +22,11 @@ public class ReservationClientImpl implements ReservationClient {
     }
 
     @Override
-    public ReservationDTO createReservation(ReservationDTO reservationDTO) {
-        ReservationOuterClass.Reservation reservationProto = reservationConverter.toProto(reservationDTO);
+    public ReservationDTO createReservation(CreateReservationDTO reservationDTO) {
         var request = ReservationOuterClass.CreateReservationRequest.newBuilder()
-                .setReservation(reservationProto)
+                .setReservedByUsername(reservationDTO.getReservedByUsername())
+                .setMenuId(reservationDTO.getMenuId())
+                .setQuantity(reservationDTO.getQuantity())
                 .build();
         var reservationResponse = reservationServiceBlockingStub.createReservation(request);
         return reservationConverter.toDTO(reservationResponse.getReservation());

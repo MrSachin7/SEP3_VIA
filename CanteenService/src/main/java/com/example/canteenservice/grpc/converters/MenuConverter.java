@@ -9,7 +9,7 @@ import java.util.List;
 @Component
 public class MenuConverter {
 
-    public MenuDTO toDTO(MenuOuterClass.Menu menu){
+    public MenuDTO toDTO(MenuOuterClass.Menu menu) {
         MenuDTO menuDTO = new MenuDTO();
         menuDTO.setId(menu.getId());
         menuDTO.setName(menu.getName());
@@ -19,18 +19,26 @@ public class MenuConverter {
         return menuDTO;
     }
 
-    public List<MenuDTO> toDTOList(List<MenuOuterClass.Menu> menus){
+    public List<MenuDTO> toDTOList(List<MenuOuterClass.Menu> menus) {
         // We map the list of menus to a list of menuDTOs
         return menus.stream().map(this::toDTO).toList();
     }
 
-    public MenuOuterClass.Menu toProto(MenuDTO menuDTO){
-        return MenuOuterClass.Menu.newBuilder()
+    public MenuOuterClass.Menu toProto(MenuDTO menuDTO) {
+        var builder = MenuOuterClass.Menu.newBuilder()
                 .setId(menuDTO.getId())
-                .setName(menuDTO.getName())
-                .setDescription(menuDTO.getDescription())
-                .setPrice(menuDTO.getPrice())
-                .addAllIngredients(menuDTO.getIngredients())
-                .build();
+                .setPrice(menuDTO.getPrice());
+        if (menuDTO.getName() != null) {
+            builder.setName(menuDTO.getName());
+        }
+        if (menuDTO.getDescription() != null) {
+            builder.setDescription(menuDTO.getDescription());
+        }
+        if (menuDTO.getIngredients() != null) {
+            builder.addAllIngredients(menuDTO.getIngredients());
+        }
+        return builder.build();
+
+
     }
 }

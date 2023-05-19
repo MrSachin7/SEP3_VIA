@@ -4619,17 +4619,24 @@ public final class ReservationOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.reservation.Reservation reservation = 1;</code>
+     * <code>int32 menuId = 1;</code>
      */
-    boolean hasReservation();
+    int getMenuId();
+
     /**
-     * <code>.reservation.Reservation reservation = 1;</code>
+     * <code>string reservedByUsername = 2;</code>
      */
-    grpcProtoFiles.ReservationOuterClass.Reservation getReservation();
+    java.lang.String getReservedByUsername();
     /**
-     * <code>.reservation.Reservation reservation = 1;</code>
+     * <code>string reservedByUsername = 2;</code>
      */
-    grpcProtoFiles.ReservationOuterClass.ReservationOrBuilder getReservationOrBuilder();
+    com.google.protobuf.ByteString
+        getReservedByUsernameBytes();
+
+    /**
+     * <code>int32 quantity = 3;</code>
+     */
+    int getQuantity();
   }
   /**
    * Protobuf type {@code reservation.CreateReservationRequest}
@@ -4644,6 +4651,9 @@ public final class ReservationOuterClass {
       super(builder);
     }
     private CreateReservationRequest() {
+      menuId_ = 0;
+      reservedByUsername_ = "";
+      quantity_ = 0;
     }
 
     @java.lang.Override
@@ -4670,17 +4680,20 @@ public final class ReservationOuterClass {
             case 0:
               done = true;
               break;
-            case 10: {
-              grpcProtoFiles.ReservationOuterClass.Reservation.Builder subBuilder = null;
-              if (reservation_ != null) {
-                subBuilder = reservation_.toBuilder();
-              }
-              reservation_ = input.readMessage(grpcProtoFiles.ReservationOuterClass.Reservation.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(reservation_);
-                reservation_ = subBuilder.buildPartial();
-              }
+            case 8: {
 
+              menuId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              reservedByUsername_ = s;
+              break;
+            }
+            case 24: {
+
+              quantity_ = input.readInt32();
               break;
             }
             default: {
@@ -4715,25 +4728,56 @@ public final class ReservationOuterClass {
               grpcProtoFiles.ReservationOuterClass.CreateReservationRequest.class, grpcProtoFiles.ReservationOuterClass.CreateReservationRequest.Builder.class);
     }
 
-    public static final int RESERVATION_FIELD_NUMBER = 1;
-    private grpcProtoFiles.ReservationOuterClass.Reservation reservation_;
+    public static final int MENUID_FIELD_NUMBER = 1;
+    private int menuId_;
     /**
-     * <code>.reservation.Reservation reservation = 1;</code>
+     * <code>int32 menuId = 1;</code>
      */
-    public boolean hasReservation() {
-      return reservation_ != null;
+    public int getMenuId() {
+      return menuId_;
+    }
+
+    public static final int RESERVEDBYUSERNAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object reservedByUsername_;
+    /**
+     * <code>string reservedByUsername = 2;</code>
+     */
+    public java.lang.String getReservedByUsername() {
+      java.lang.Object ref = reservedByUsername_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        reservedByUsername_ = s;
+        return s;
+      }
     }
     /**
-     * <code>.reservation.Reservation reservation = 1;</code>
+     * <code>string reservedByUsername = 2;</code>
      */
-    public grpcProtoFiles.ReservationOuterClass.Reservation getReservation() {
-      return reservation_ == null ? grpcProtoFiles.ReservationOuterClass.Reservation.getDefaultInstance() : reservation_;
+    public com.google.protobuf.ByteString
+        getReservedByUsernameBytes() {
+      java.lang.Object ref = reservedByUsername_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        reservedByUsername_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
+
+    public static final int QUANTITY_FIELD_NUMBER = 3;
+    private int quantity_;
     /**
-     * <code>.reservation.Reservation reservation = 1;</code>
+     * <code>int32 quantity = 3;</code>
      */
-    public grpcProtoFiles.ReservationOuterClass.ReservationOrBuilder getReservationOrBuilder() {
-      return getReservation();
+    public int getQuantity() {
+      return quantity_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -4750,8 +4794,14 @@ public final class ReservationOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (reservation_ != null) {
-        output.writeMessage(1, getReservation());
+      if (menuId_ != 0) {
+        output.writeInt32(1, menuId_);
+      }
+      if (!getReservedByUsernameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, reservedByUsername_);
+      }
+      if (quantity_ != 0) {
+        output.writeInt32(3, quantity_);
       }
       unknownFields.writeTo(output);
     }
@@ -4762,9 +4812,16 @@ public final class ReservationOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (reservation_ != null) {
+      if (menuId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getReservation());
+          .computeInt32Size(1, menuId_);
+      }
+      if (!getReservedByUsernameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, reservedByUsername_);
+      }
+      if (quantity_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, quantity_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4782,11 +4839,12 @@ public final class ReservationOuterClass {
       grpcProtoFiles.ReservationOuterClass.CreateReservationRequest other = (grpcProtoFiles.ReservationOuterClass.CreateReservationRequest) obj;
 
       boolean result = true;
-      result = result && (hasReservation() == other.hasReservation());
-      if (hasReservation()) {
-        result = result && getReservation()
-            .equals(other.getReservation());
-      }
+      result = result && (getMenuId()
+          == other.getMenuId());
+      result = result && getReservedByUsername()
+          .equals(other.getReservedByUsername());
+      result = result && (getQuantity()
+          == other.getQuantity());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -4798,10 +4856,12 @@ public final class ReservationOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasReservation()) {
-        hash = (37 * hash) + RESERVATION_FIELD_NUMBER;
-        hash = (53 * hash) + getReservation().hashCode();
-      }
+      hash = (37 * hash) + MENUID_FIELD_NUMBER;
+      hash = (53 * hash) + getMenuId();
+      hash = (37 * hash) + RESERVEDBYUSERNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getReservedByUsername().hashCode();
+      hash = (37 * hash) + QUANTITY_FIELD_NUMBER;
+      hash = (53 * hash) + getQuantity();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4935,12 +4995,12 @@ public final class ReservationOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (reservationBuilder_ == null) {
-          reservation_ = null;
-        } else {
-          reservation_ = null;
-          reservationBuilder_ = null;
-        }
+        menuId_ = 0;
+
+        reservedByUsername_ = "";
+
+        quantity_ = 0;
+
         return this;
       }
 
@@ -4967,11 +5027,9 @@ public final class ReservationOuterClass {
       @java.lang.Override
       public grpcProtoFiles.ReservationOuterClass.CreateReservationRequest buildPartial() {
         grpcProtoFiles.ReservationOuterClass.CreateReservationRequest result = new grpcProtoFiles.ReservationOuterClass.CreateReservationRequest(this);
-        if (reservationBuilder_ == null) {
-          result.reservation_ = reservation_;
-        } else {
-          result.reservation_ = reservationBuilder_.build();
-        }
+        result.menuId_ = menuId_;
+        result.reservedByUsername_ = reservedByUsername_;
+        result.quantity_ = quantity_;
         onBuilt();
         return result;
       }
@@ -5020,8 +5078,15 @@ public final class ReservationOuterClass {
 
       public Builder mergeFrom(grpcProtoFiles.ReservationOuterClass.CreateReservationRequest other) {
         if (other == grpcProtoFiles.ReservationOuterClass.CreateReservationRequest.getDefaultInstance()) return this;
-        if (other.hasReservation()) {
-          mergeReservation(other.getReservation());
+        if (other.getMenuId() != 0) {
+          setMenuId(other.getMenuId());
+        }
+        if (!other.getReservedByUsername().isEmpty()) {
+          reservedByUsername_ = other.reservedByUsername_;
+          onChanged();
+        }
+        if (other.getQuantity() != 0) {
+          setQuantity(other.getQuantity());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -5052,121 +5117,125 @@ public final class ReservationOuterClass {
         return this;
       }
 
-      private grpcProtoFiles.ReservationOuterClass.Reservation reservation_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          grpcProtoFiles.ReservationOuterClass.Reservation, grpcProtoFiles.ReservationOuterClass.Reservation.Builder, grpcProtoFiles.ReservationOuterClass.ReservationOrBuilder> reservationBuilder_;
+      private int menuId_ ;
       /**
-       * <code>.reservation.Reservation reservation = 1;</code>
+       * <code>int32 menuId = 1;</code>
        */
-      public boolean hasReservation() {
-        return reservationBuilder_ != null || reservation_ != null;
+      public int getMenuId() {
+        return menuId_;
       }
       /**
-       * <code>.reservation.Reservation reservation = 1;</code>
+       * <code>int32 menuId = 1;</code>
        */
-      public grpcProtoFiles.ReservationOuterClass.Reservation getReservation() {
-        if (reservationBuilder_ == null) {
-          return reservation_ == null ? grpcProtoFiles.ReservationOuterClass.Reservation.getDefaultInstance() : reservation_;
-        } else {
-          return reservationBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.reservation.Reservation reservation = 1;</code>
-       */
-      public Builder setReservation(grpcProtoFiles.ReservationOuterClass.Reservation value) {
-        if (reservationBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          reservation_ = value;
-          onChanged();
-        } else {
-          reservationBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.reservation.Reservation reservation = 1;</code>
-       */
-      public Builder setReservation(
-          grpcProtoFiles.ReservationOuterClass.Reservation.Builder builderForValue) {
-        if (reservationBuilder_ == null) {
-          reservation_ = builderForValue.build();
-          onChanged();
-        } else {
-          reservationBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.reservation.Reservation reservation = 1;</code>
-       */
-      public Builder mergeReservation(grpcProtoFiles.ReservationOuterClass.Reservation value) {
-        if (reservationBuilder_ == null) {
-          if (reservation_ != null) {
-            reservation_ =
-              grpcProtoFiles.ReservationOuterClass.Reservation.newBuilder(reservation_).mergeFrom(value).buildPartial();
-          } else {
-            reservation_ = value;
-          }
-          onChanged();
-        } else {
-          reservationBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.reservation.Reservation reservation = 1;</code>
-       */
-      public Builder clearReservation() {
-        if (reservationBuilder_ == null) {
-          reservation_ = null;
-          onChanged();
-        } else {
-          reservation_ = null;
-          reservationBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.reservation.Reservation reservation = 1;</code>
-       */
-      public grpcProtoFiles.ReservationOuterClass.Reservation.Builder getReservationBuilder() {
+      public Builder setMenuId(int value) {
         
+        menuId_ = value;
         onChanged();
-        return getReservationFieldBuilder().getBuilder();
+        return this;
       }
       /**
-       * <code>.reservation.Reservation reservation = 1;</code>
+       * <code>int32 menuId = 1;</code>
        */
-      public grpcProtoFiles.ReservationOuterClass.ReservationOrBuilder getReservationOrBuilder() {
-        if (reservationBuilder_ != null) {
-          return reservationBuilder_.getMessageOrBuilder();
+      public Builder clearMenuId() {
+        
+        menuId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object reservedByUsername_ = "";
+      /**
+       * <code>string reservedByUsername = 2;</code>
+       */
+      public java.lang.String getReservedByUsername() {
+        java.lang.Object ref = reservedByUsername_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          reservedByUsername_ = s;
+          return s;
         } else {
-          return reservation_ == null ?
-              grpcProtoFiles.ReservationOuterClass.Reservation.getDefaultInstance() : reservation_;
+          return (java.lang.String) ref;
         }
       }
       /**
-       * <code>.reservation.Reservation reservation = 1;</code>
+       * <code>string reservedByUsername = 2;</code>
        */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          grpcProtoFiles.ReservationOuterClass.Reservation, grpcProtoFiles.ReservationOuterClass.Reservation.Builder, grpcProtoFiles.ReservationOuterClass.ReservationOrBuilder> 
-          getReservationFieldBuilder() {
-        if (reservationBuilder_ == null) {
-          reservationBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              grpcProtoFiles.ReservationOuterClass.Reservation, grpcProtoFiles.ReservationOuterClass.Reservation.Builder, grpcProtoFiles.ReservationOuterClass.ReservationOrBuilder>(
-                  getReservation(),
-                  getParentForChildren(),
-                  isClean());
-          reservation_ = null;
+      public com.google.protobuf.ByteString
+          getReservedByUsernameBytes() {
+        java.lang.Object ref = reservedByUsername_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          reservedByUsername_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
         }
-        return reservationBuilder_;
+      }
+      /**
+       * <code>string reservedByUsername = 2;</code>
+       */
+      public Builder setReservedByUsername(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        reservedByUsername_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string reservedByUsername = 2;</code>
+       */
+      public Builder clearReservedByUsername() {
+        
+        reservedByUsername_ = getDefaultInstance().getReservedByUsername();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string reservedByUsername = 2;</code>
+       */
+      public Builder setReservedByUsernameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        reservedByUsername_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int quantity_ ;
+      /**
+       * <code>int32 quantity = 3;</code>
+       */
+      public int getQuantity() {
+        return quantity_;
+      }
+      /**
+       * <code>int32 quantity = 3;</code>
+       */
+      public Builder setQuantity(int value) {
+        
+        quantity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 quantity = 3;</code>
+       */
+      public Builder clearQuantity() {
+        
+        quantity_ = 0;
+        onChanged();
+        return this;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -5895,22 +5964,22 @@ public final class ReservationOuterClass {
       "vation.Reservation\"#\n\025GetReservationRequ" +
       "est\022\n\n\002id\030\001 \001(\005\"G\n\026GetReservationRespons" +
       "e\022-\n\013reservation\030\001 \001(\0132\030.reservation.Res" +
-      "ervation\"I\n\030CreateReservationRequest\022-\n\013" +
-      "reservation\030\001 \001(\0132\030.reservation.Reservat" +
-      "ion\"J\n\031CreateReservationResponse\022-\n\013rese" +
-      "rvation\030\001 \001(\0132\030.reservation.Reservation2" +
-      "\262\003\n\022ReservationService\022d\n\021createReservat" +
-      "ion\022%.reservation.CreateReservationReque" +
-      "st\032&.reservation.CreateReservationRespon" +
-      "se\"\000\022[\n\016getReservation\022\".reservation.Get" +
-      "ReservationRequest\032#.reservation.GetRese" +
-      "rvationResponse\"\000\022g\n\022getAllReservations\022" +
-      "&.reservation.GetAllReservationsRequest\032" +
-      "\'.reservation.GetAllReservationsResponse" +
-      "\"\000\022p\n\025getReservationsByUser\022).reservatio" +
-      "n.GetReservationsByUserRequest\032*.reserva" +
-      "tion.GetReservationsByUserResponse\"\000B\020\n\016" +
-      "grpcProtoFilesb\006proto3"
+      "ervation\"X\n\030CreateReservationRequest\022\016\n\006" +
+      "menuId\030\001 \001(\005\022\032\n\022reservedByUsername\030\002 \001(\t" +
+      "\022\020\n\010quantity\030\003 \001(\005\"J\n\031CreateReservationR" +
+      "esponse\022-\n\013reservation\030\001 \001(\0132\030.reservati" +
+      "on.Reservation2\262\003\n\022ReservationService\022d\n" +
+      "\021createReservation\022%.reservation.CreateR" +
+      "eservationRequest\032&.reservation.CreateRe" +
+      "servationResponse\"\000\022[\n\016getReservation\022\"." +
+      "reservation.GetReservationRequest\032#.rese" +
+      "rvation.GetReservationResponse\"\000\022g\n\022getA" +
+      "llReservations\022&.reservation.GetAllReser" +
+      "vationsRequest\032\'.reservation.GetAllReser" +
+      "vationsResponse\"\000\022p\n\025getReservationsByUs" +
+      "er\022).reservation.GetReservationsByUserRe" +
+      "quest\032*.reservation.GetReservationsByUse" +
+      "rResponse\"\000B\020\n\016grpcProtoFilesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5973,7 +6042,7 @@ public final class ReservationOuterClass {
     internal_static_reservation_CreateReservationRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_reservation_CreateReservationRequest_descriptor,
-        new java.lang.String[] { "Reservation", });
+        new java.lang.String[] { "MenuId", "ReservedByUsername", "Quantity", });
     internal_static_reservation_CreateReservationResponse_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_reservation_CreateReservationResponse_fieldAccessorTable = new

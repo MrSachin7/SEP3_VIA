@@ -1,5 +1,6 @@
 package com.example.canteenservice.controller;
 
+import com.example.canteenservice.dto.CreateReservationDTO;
 import com.example.canteenservice.dto.ReservationDTO;
 import com.example.canteenservice.services.ReservationService;
 import jakarta.websocket.server.PathParam;
@@ -21,12 +22,13 @@ public class ReservationController {
     }
 
     @PostMapping(value = "/reservations")
-    public ResponseEntity createReservation(@RequestBody ReservationDTO reservationDTO) {
+    public ResponseEntity createReservation(@RequestBody CreateReservationDTO reservationDTO) {
         try {
             ReservationDTO createdReservation = reservationService.createReservation(reservationDTO);
             return ResponseEntity.ok(createdReservation);
         } catch (Exception e) {
-            return ResponseUtil.internalServerError(e);
+            throw e;
+//            return ResponseUtil.internalServerError(e);
         }
     }
 
