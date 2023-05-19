@@ -1,6 +1,6 @@
 package com.example.canteenservice.controller;
 import com.example.canteenservice.dto.MenuDTO;
-import com.example.canteenservice.services.impl.MenuService;
+import com.example.canteenservice.services.impl.MenuServiceImpl;
 import jakarta.websocket.server.PathParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,16 +9,16 @@ import java.util.List;
 
 @RestController
 public class MenuController {
-    private final MenuService menuService;
+    private final MenuServiceImpl menuServiceImpl;
 
-    public MenuController(MenuService menuService) {
-        this.menuService = menuService;
+    public MenuController(MenuServiceImpl menuServiceImpl) {
+        this.menuServiceImpl = menuServiceImpl;
     }
 
     @PostMapping(value = "/menus")
     public ResponseEntity createMenu(@RequestBody MenuDTO menuDTO) {
         try {
-            MenuDTO addedMenu = menuService.createMenu(menuDTO);
+            MenuDTO addedMenu = menuServiceImpl.createMenu(menuDTO);
             return ResponseEntity.ok(addedMenu);
         } catch (Exception e) {
             return ResponseUtil.internalServerError(e);
@@ -32,9 +32,9 @@ public class MenuController {
         try {
             List<MenuDTO> menuDTOS;
             if (name == null || name.equals("")) {
-                menuDTOS = menuService.getAllMenus();
+                menuDTOS = menuServiceImpl.getAllMenus();
             } else {
-                menuDTOS = menuService.getMenusByName(name);
+                menuDTOS = menuServiceImpl.getMenusByName(name);
             }
             return ResponseEntity.ok(menuDTOS);
         } catch (Exception e) {
@@ -45,7 +45,7 @@ public class MenuController {
     @GetMapping(value = "/menus/{menuId}")
     public ResponseEntity getMenusById(@PathVariable("menuId") int menuId) {
         try {
-            MenuDTO menuDTO = menuService.getMenuById(menuId);
+            MenuDTO menuDTO = menuServiceImpl.getMenuById(menuId);
             return ResponseEntity.ok(menuDTO);
         } catch (Exception e) {
             return ResponseUtil.internalServerError(e);

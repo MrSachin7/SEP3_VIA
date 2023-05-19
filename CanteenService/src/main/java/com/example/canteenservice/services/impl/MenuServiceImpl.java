@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MenuService implements com.example.canteenservice.services.MenuService {
+public class MenuServiceImpl implements com.example.canteenservice.services.MenuService {
 
     private final MenuClient menuClient;
 
-    public MenuService(MenuClient menuClient) {
+    public MenuServiceImpl(MenuClient menuClient) {
         this.menuClient = menuClient;
     }
 

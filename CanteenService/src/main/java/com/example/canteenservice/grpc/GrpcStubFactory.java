@@ -1,5 +1,6 @@
 package com.example.canteenservice.grpc;
 import grpcProtoFiles.MenuServiceGrpc;
+import grpcProtoFiles.ReservationServiceGrpc;
 import grpcProtoFiles.UserServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -10,8 +11,9 @@ import org.springframework.stereotype.Component;
 public class GrpcStubFactory {
     private  ManagedChannel managedChannel;
     private  UserServiceGrpc.UserServiceBlockingStub userServiceBlockingStub;
-
     private MenuServiceGrpc.MenuServiceBlockingStub menuServiceBlockingStub;
+
+    private ReservationServiceGrpc.ReservationServiceBlockingStub reservationServiceBlockingStub;
 
     public ManagedChannel getManagedChannel() {
         if (managedChannel == null) {
@@ -34,6 +36,13 @@ public class GrpcStubFactory {
             menuServiceBlockingStub = MenuServiceGrpc.newBlockingStub(getManagedChannel());
         }
         return menuServiceBlockingStub;
+    }
+
+    public ReservationServiceGrpc.ReservationServiceBlockingStub getReservationServiceBlockingStub() {
+        if (reservationServiceBlockingStub == null) {
+            reservationServiceBlockingStub = ReservationServiceGrpc.newBlockingStub(getManagedChannel());
+        }
+        return reservationServiceBlockingStub;
     }
 
 }
