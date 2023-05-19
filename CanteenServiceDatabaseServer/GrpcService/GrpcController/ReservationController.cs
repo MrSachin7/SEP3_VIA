@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using DTO;
 using Grpc.Core;
 using grpcProtoFiles;
 using GrpcService.converters;
@@ -16,7 +17,11 @@ public class ReservationController : ReservationService.ReservationServiceBase {
 
     public override async Task<CreateReservationResponse> createReservation(CreateReservationRequest request,
         ServerCallContext context) {
-        var reservationToAdd = _reservationConverter.ToDto(request.Reservation);
+        CreateReservationDTO reservationToAdd = new() {
+            MenuId = request.MenuId,
+            Quantity = request.Quantity,
+            ReservedBy = request.ReservedByUsername
+        };
         var added = await _reservationService.AddReservation(reservationToAdd);
         return new CreateReservationResponse() {
             Reservation = _reservationConverter.ToProto(added)

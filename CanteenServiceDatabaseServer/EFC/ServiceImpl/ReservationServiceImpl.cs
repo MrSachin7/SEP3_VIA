@@ -1,6 +1,7 @@
 ﻿using Contracts;
 using DTO;
 using EFC.converters;
+using EFC.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFC.ServiceImpl;
@@ -14,8 +15,13 @@ public class ReservationServiceImpl : IReservationService {
         this._databaseAccess = databaseAccess;
     }
 
-    public async Task<ReservationDTO> AddReservation(ReservationDTO reservation) {
-        var reservationEntity = _reservationConverter.ToEntity(reservation);
+    public async Task<ReservationDTO> AddReservation(CreateReservationDTO reservation) {
+        ReservationEntity reservationEntity = new ReservationEntity() {
+            Quantity = reservation.Quantity,
+            IsDelivered = false,
+        };
+        reservationEntity.ReservedBy= (await _databaseAccess.Users.FindAsync(reservation.ReservedBy))!;
+        reservationEntity.Menu =(await _databaseAccess.Menus.FindAsync(reservation.MenuId))!;
         var added = await _databaseAccess.Reservations.AddAsync(reservationEntity);
         await _databaseAccess.SaveChangesAsync();
         return _reservationConverter.ToDto(added.Entity);
@@ -34,7 +40,7 @@ public class ReservationServiceImpl : IReservationService {
 
     public async Task<List<ReservationDTO>> GetAllReservations() {
         var reservations = await _databaseAccess.Reservations.Include(entity => entity.ReservedBy)
-            .Include(entity => entity.Menu).ToListAsync();
+            .Include(entity => entity.Menu).ThenInclude(menu=>menu.MenuIngredients).ToListAsync();
         return _reservationConverter.ToDtoList(reservations);
     }
 
@@ -45,6 +51,7 @@ public class ReservationServiceImpl : IReservationService {
         if (reservations == null) {
             throw new Exception("Reservation not found");
         }
+
         return _reservationConverter.ToDtoList(reservations);
     }
 }
