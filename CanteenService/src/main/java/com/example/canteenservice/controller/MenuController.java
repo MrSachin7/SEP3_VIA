@@ -43,7 +43,7 @@ public class MenuController {
     }
 
     @GetMapping(value = "/menus/{menuId}")
-    public ResponseEntity getMenusById(@PathVariable("menuId") int menuId) {
+    public ResponseEntity getMenuById(@PathVariable("menuId") int menuId) {
         try {
             MenuDTO menuDTO = menuServiceImpl.getMenuById(menuId);
             return ResponseEntity.ok(menuDTO);
