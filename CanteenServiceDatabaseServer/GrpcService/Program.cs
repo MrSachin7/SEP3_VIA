@@ -4,7 +4,6 @@ using EFC.converters;
 using EFC.ServiceImpl;
 using grpcProtoFiles;
 using GrpcService.GrpcController;
-using GrpcService.Services;
 using UserService = grpcProtoFiles.UserService;
 
 var builder = WebApplication.CreateBuilder(args);

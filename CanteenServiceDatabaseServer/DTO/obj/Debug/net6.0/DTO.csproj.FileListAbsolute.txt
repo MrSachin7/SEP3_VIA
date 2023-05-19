@@ -9,3 +9,4 @@ C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\obj\Debug\
 C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\obj\Debug\net6.0\DTO.dll
 C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\obj\Debug\net6.0\ref\DTO.dll
 C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\obj\Debug\net6.0\DTO.pdb
+C:\Users\nepal\OneDrive\Desktop\SEP3\CanteenServiceDatabaseServer\DTO\obj\Debug\net6.0\DTO.csproj.AssemblyReference.cache

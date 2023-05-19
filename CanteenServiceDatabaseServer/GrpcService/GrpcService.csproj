@@ -29,17 +29,20 @@
       <Compile Include="obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
       <Compile Include="obj\Debug\net6.0\GrpcService.AssemblyInfo.cs" />
       <Compile Include="obj\Debug\net6.0\GrpcService.GlobalUsings.g.cs" />
+      <Compile Include="obj\Debug\net6.0\Protos\Menu.cs" />
+      <Compile Include="obj\Debug\net6.0\Protos\MenuGrpc.cs" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="bin\Debug\net6.0\ref\" />
-      <Folder Include="obj\Debug\net6.0\Protos\" />
       <Folder Include="obj\Debug\net6.0\ref\" />
       <Folder Include="obj\Debug\net6.0\staticwebassets\" />
     </ItemGroup>
 
     <ItemGroup>
       <Protobuf Include="Protos\user.proto" />
+      <None Remove="Protos\menu.proto" />
+      <Protobuf Include="Protos\menu.proto" />
     </ItemGroup>
 
     <ItemGroup>
