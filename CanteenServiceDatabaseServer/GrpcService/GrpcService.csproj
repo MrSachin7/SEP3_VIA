@@ -12,10 +12,23 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Content Include="obj\Debug\net6.0\12fbc7ffe642ca7e_menu.protodep" />
+      <Content Include="obj\Debug\net6.0\12fbc7ffe642ca7e_reservation.protodep" />
+      <Content Include="obj\Debug\net6.0\12fbc7ffe642ca7e_user.protodep" />
+      <Content Include="obj\Debug\net6.0\apphost.exe" />
       <Content Include="obj\Debug\net6.0\GrpcService.AssemblyInfoInputs.cache" />
       <Content Include="obj\Debug\net6.0\GrpcService.assets.cache" />
       <Content Include="obj\Debug\net6.0\GrpcService.csproj.AssemblyReference.cache" />
+      <Content Include="obj\Debug\net6.0\GrpcService.csproj.CopyComplete" />
+      <Content Include="obj\Debug\net6.0\GrpcService.csproj.CoreCompileInputs.cache" />
+      <Content Include="obj\Debug\net6.0\GrpcService.csproj.FileListAbsolute.txt" />
+      <Content Include="obj\Debug\net6.0\GrpcService.dll" />
       <Content Include="obj\Debug\net6.0\GrpcService.GeneratedMSBuildEditorConfig.editorconfig" />
+      <Content Include="obj\Debug\net6.0\GrpcService.genruntimeconfig.cache" />
+      <Content Include="obj\Debug\net6.0\GrpcService.MvcApplicationPartsAssemblyInfo.cache" />
+      <Content Include="obj\Debug\net6.0\GrpcService.pdb" />
+      <Content Include="obj\Debug\net6.0\ref\GrpcService.dll" />
+      <Content Include="obj\Debug\net6.0\staticwebassets.build.json" />
       <Content Include="obj\GrpcService.csproj.nuget.dgspec.json" />
       <Content Include="obj\GrpcService.csproj.nuget.g.props" />
       <Content Include="obj\GrpcService.csproj.nuget.g.targets" />
@@ -31,11 +44,14 @@
       <Compile Include="obj\Debug\net6.0\GrpcService.GlobalUsings.g.cs" />
       <Compile Include="obj\Debug\net6.0\Protos\Menu.cs" />
       <Compile Include="obj\Debug\net6.0\Protos\MenuGrpc.cs" />
+      <Compile Include="obj\Debug\net6.0\Protos\Reservation.cs" />
+      <Compile Include="obj\Debug\net6.0\Protos\ReservationGrpc.cs" />
+      <Compile Include="obj\Debug\net6.0\Protos\User.cs" />
+      <Compile Include="obj\Debug\net6.0\Protos\UserGrpc.cs" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="bin\Debug\net6.0\ref\" />
-      <Folder Include="obj\Debug\net6.0\ref\" />
       <Folder Include="obj\Debug\net6.0\staticwebassets\" />
     </ItemGroup>
 
@@ -43,6 +59,8 @@
       <Protobuf Include="Protos\user.proto" />
       <None Remove="Protos\menu.proto" />
       <Protobuf Include="Protos\menu.proto" />
+      <None Remove="Protos\reservation.proto" />
+      <Protobuf Include="Protos\reservation.proto" />
     </ItemGroup>
 
     <ItemGroup>

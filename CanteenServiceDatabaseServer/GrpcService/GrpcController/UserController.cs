@@ -16,7 +16,7 @@ public class UserController : UserService.UserServiceBase {
     }
 
     public override async Task<CreateUserResponse> CreateUser(CreateUserRequest request, ServerCallContext context) {
-        UserDTO userToAdd = _userConverter.ToDTO(request.User);
+        UserDTO userToAdd = _userConverter.ToDto(request.User);
         var addedUser = await _userService.AddUser(userToAdd);
         return new CreateUserResponse() {
             User = _userConverter.ToProto(addedUser)

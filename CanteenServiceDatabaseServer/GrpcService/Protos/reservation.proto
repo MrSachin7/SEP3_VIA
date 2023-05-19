@@ -1,0 +1,54 @@
+﻿syntax = "proto3";
+option csharp_namespace = "grpcProtoFiles";
+import "Protos/user.proto";
+import "Protos/menu.proto";
+
+package reservation;
+
+service ReservationService {
+    rpc createReservation(CreateReservationRequest) returns (CreateReservationResponse) {}
+    rpc getReservation(GetReservationRequest) returns (GetReservationResponse) {}
+    rpc getAllReservations(GetAllReservationsRequest) returns (GetAllReservationsResponse) {}
+    rpc getReservationsByUser(GetReservationsByUserRequest) returns (GetReservationsByUserResponse) {}
+}
+
+message Reservation{
+    int32 id = 1;
+    user.User reservedBy = 2;
+    menu.Menu menu = 3;
+    int32 quantity = 4;
+    bool isDelivered = 5;
+}
+
+
+message GetReservationsByUserRequest{
+    string username = 1;
+}
+
+message GetReservationsByUserResponse{
+    repeated Reservation reservations = 1;
+}
+
+message GetAllReservationsRequest{
+}
+message GetAllReservationsResponse{
+    repeated Reservation reservations = 1;
+}
+
+message GetReservationRequest{
+    int32 id = 1;
+}
+
+message GetReservationResponse{
+    Reservation reservation = 1;
+}
+
+message CreateReservationRequest{
+    Reservation reservation = 1;
+}
+
+message CreateReservationResponse{
+    Reservation reservation = 1;
+}
+
+

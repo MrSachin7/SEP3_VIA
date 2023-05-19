@@ -14,16 +14,20 @@ builder.Services.AddDbContext<DatabaseAccess>();
 builder.Services.AddGrpc();
 builder.Services.AddScoped<IUserService, UserServiceImpl>();
 builder.Services.AddScoped<IMenuService, MenuServiceImpl>();
+builder.Services.AddScoped<IReservationService, ReservationServiceImpl>();
 builder.Services.AddScoped<MenuConverter>();
 builder.Services.AddScoped<ReservationConverter>();
 builder.Services.AddScoped<UserConverter>();
 builder.Services.AddScoped<GrpcService.converters.UserConverter>();
 builder.Services.AddScoped<GrpcService.converters.MenuConverter>();
+builder.Services.AddScoped<GrpcService.converters.ReservationConverter>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.MapGrpcService<UserController>();
+app.MapGrpcService<ReservationController>();
+app.MapGrpcService<MenuController>();
 app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
 
 app.Run();

@@ -4,7 +4,7 @@ using grpcProtoFiles;
 namespace GrpcService.converters;
 
 public class UserConverter {
-    public UserDTO ToDTO(User user) {
+    public UserDTO ToDto(User user) {
         return new UserDTO() {
             Username = user.Username,
             Password = user.Password,
