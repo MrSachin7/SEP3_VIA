@@ -6,4 +6,6 @@ public class IngredientEntity {
     [Key]
     public string IngredientName { get; set; }
 
+    public List<MenuIngredientEntity> MenuIngredients { get; set; }
+
 }

@@ -16,7 +16,7 @@ public class ReservationConverter {
         return new ReservationDTO() {
             Id = entity.Id,
             ReservedBy = userConverter.ToDTO(entity.ReservedBy),
-            Menu = menuConverter.ToDTO(entity.Menu),
+            Menu = menuConverter.ToDto(entity.Menu),
             Quantity = entity.Quantity,
             IsDelivered = entity.IsDelivered
         };

@@ -2,9 +2,7 @@ using Contracts;
 using EFC;
 using EFC.converters;
 using EFC.ServiceImpl;
-using grpcProtoFiles;
 using GrpcService.GrpcController;
-using UserService = grpcProtoFiles.UserService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,10 +13,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DatabaseAccess>();
 builder.Services.AddGrpc();
 builder.Services.AddScoped<IUserService, UserServiceImpl>();
+builder.Services.AddScoped<IMenuService, MenuServiceImpl>();
 builder.Services.AddScoped<MenuConverter>();
 builder.Services.AddScoped<ReservationConverter>();
 builder.Services.AddScoped<UserConverter>();
 builder.Services.AddScoped<GrpcService.converters.UserConverter>();
+builder.Services.AddScoped<GrpcService.converters.MenuConverter>();
 
 var app = builder.Build();
 
