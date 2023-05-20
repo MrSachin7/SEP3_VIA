@@ -1,8 +1,11 @@
+using BlazorApplication.Authentication;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using BlazorApplication.Data;
 using Contracts;
 using HttpClients;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +17,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<IUserService, UserHttpClient>();
 builder.Services.AddScoped<IReservationService, ReservationHttpClient>();
 builder.Services.AddScoped<IMenuService, MenuHttpClient>();
-
+builder.Services.AddScoped<AuthenticationStateProvider, AuthenticationProvider>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

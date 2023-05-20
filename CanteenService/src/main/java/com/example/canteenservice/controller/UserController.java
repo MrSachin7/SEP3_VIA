@@ -2,7 +2,6 @@ package com.example.canteenservice.controller;
 
 import com.example.canteenservice.dto.UserDTO;
 import com.example.canteenservice.services.UserService;
-import com.example.canteenservice.services.impl.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +39,7 @@ public class UserController {
     @PostMapping(value = "/users/login")
     public ResponseEntity login(@RequestBody UserDTO userDTO) {
         try {
-         String token = userService.authenticateUser(userDTO);
+         UserDTO token = userService.authenticateUser(userDTO);
             return ResponseEntity.ok(token);
         } catch (Exception e) {
             return ResponseUtil.notFound(e);

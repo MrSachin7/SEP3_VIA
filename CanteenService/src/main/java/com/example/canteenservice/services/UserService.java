@@ -8,5 +8,5 @@ public interface UserService {
     UserDTO createUser(UserDTO userDTO);
     UserDTO getUserByUsername(String username);
 
-    String authenticateUser(UserDTO userDTO);
+    UserDTO authenticateUser(UserDTO userDTO);
 }

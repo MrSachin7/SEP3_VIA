@@ -2,26 +2,21 @@ package com.example.canteenservice.services.impl;
 
 import com.example.canteenservice.dto.UserDTO;
 import com.example.canteenservice.grpc.clients.UserClient;
-import com.example.canteenservice.jwt.JwtUtils;
 import com.example.canteenservice.services.UserService;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserClient userClient;
-    private final JwtUtils jwtUtils;
-    private final AuthenticationManager authenticationManager;
 
-    public UserServiceImpl(UserClient userClient, JwtUtils jwtUtils, AuthenticationManager authenticationManager) {
+    public UserServiceImpl(UserClient userClient) {
         this.userClient = userClient;
-        this.jwtUtils = jwtUtils;
-        this.authenticationManager = authenticationManager;
     }
 
     @Override
     public UserDTO createUser(UserDTO userDTO) {
+        userDTO.setPassword(hashPassword(userDTO.getPassword()));
         return userClient.createUser(userDTO);
     }
 
@@ -31,14 +26,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String authenticateUser(UserDTO userDTO) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        userDTO.getUsername(),
-                        userDTO.getPassword()
-                )
-        );
-        getUserByUsername(userDTO.getUsername());
-        return jwtUtils.generateToken(userDTO.getUsername());
+    public UserDTO authenticateUser(UserDTO userDTO) {
+        UserDTO userByUsername = getUserByUsername(userDTO.getUsername());
+        if (userByUsername == null) {
+            throw new RuntimeException("User not found");
+        }
+        if (!checkPassword(userDTO.getPassword(), userByUsername.getPassword())) {
+            throw new RuntimeException("Wrong password");
+        }
+        return userByUsername;
+    }
+
+    private String hashPassword(String plainTextPassword) {
+        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt(12));
+    }
+
+    private boolean checkPassword(String plainPassword, String hashedPassword) {
+        return BCrypt.checkpw(plainPassword, hashedPassword);
     }
 }
