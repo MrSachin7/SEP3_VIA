@@ -1,10 +1,7 @@
 using BlazorApplication.Authentication;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using BlazorApplication.Data;
 using Contracts;
 using HttpClients;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +15,15 @@ builder.Services.AddScoped<IUserService, UserHttpClient>();
 builder.Services.AddScoped<IReservationService, ReservationHttpClient>();
 builder.Services.AddScoped<IMenuService, MenuHttpClient>();
 builder.Services.AddScoped<AuthenticationStateProvider, AuthenticationProvider>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("Admin", policyBuilder => policyBuilder.RequireAuthenticatedUser().RequireClaim("Role", "Admin"));
+    options.AddPolicy("Guest", policyBuilder => policyBuilder.RequireAuthenticatedUser().RequireClaim("Role", "Guest"));
+    options.AddPolicy("All",
+        policyBuilder => policyBuilder.RequireAuthenticatedUser().RequireClaim("Role", "Guest", "Admin"));
+
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
