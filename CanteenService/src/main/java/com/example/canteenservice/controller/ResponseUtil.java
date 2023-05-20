@@ -8,4 +8,8 @@ public class ResponseUtil {
     public static ResponseEntity internalServerError(Throwable throwable){
         return new ResponseEntity(throwable.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    public static ResponseEntity notFound(Exception e) {
+        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+    }
 }

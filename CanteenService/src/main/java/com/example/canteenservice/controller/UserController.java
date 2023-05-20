@@ -37,4 +37,14 @@ public class UserController {
         }
     }
 
+    @PostMapping(value = "/users/login")
+    public ResponseEntity login(@RequestBody UserDTO userDTO) {
+        try {
+         String token = userService.authenticateUser(userDTO);
+            return ResponseEntity.ok(token);
+        } catch (Exception e) {
+            return ResponseUtil.notFound(e);
+        }
+    }
+
 }

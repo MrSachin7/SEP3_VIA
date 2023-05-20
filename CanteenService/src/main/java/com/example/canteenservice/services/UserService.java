@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service;
 public interface UserService {
     UserDTO createUser(UserDTO userDTO);
     UserDTO getUserByUsername(String username);
+
+    String authenticateUser(UserDTO userDTO);
 }
