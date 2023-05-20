@@ -52,6 +52,8 @@ public static class HttpClientUtil {
 
                 string bodyAsJson = GetSerialized<B>(body);
                 var stringContent = new StringContent(bodyAsJson, Encoding.UTF8, "application/json");
+                Console.WriteLine("Sending post request"+ bodyAsJson);
+                Console.Write("URL" + GetUrl(path));
                 responseMessage = await httpClient.PostAsync(GetUrl(path), stringContent);
                 break;
 
@@ -79,13 +81,13 @@ public static class HttpClientUtil {
     private static T GetDeserialized<T>(string jsonFormat) {
         T obj = JsonSerializer.Deserialize<T>(jsonFormat, new JsonSerializerOptions() {
             PropertyNameCaseInsensitive = true,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         })!;
         return obj;
     }
 
     private static string GetSerialized<T>(T obj) {
         string jsonFormat = JsonSerializer.Serialize(obj, new JsonSerializerOptions() {
+            PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         });
         return jsonFormat;
@@ -94,6 +96,7 @@ public static class HttpClientUtil {
     private static async Task<string> GetResponseContent(HttpResponseMessage responseMessage) {
         var responseContent = await responseMessage.Content.ReadAsStringAsync();
         if (!responseMessage.IsSuccessStatusCode) {
+            Console.WriteLine("Throwing exception");
             throw new Exception($"Error : {responseMessage.StatusCode}, {responseContent} ");
         }
 

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "4U+K6waAKtKpruJKaKUhbUDhuLMkuHpIOXcv4CwCecKImmhvai7TGLcbMWnIw9PYIl2inN9jl66XeknRTMqlKQ==",
+  "dgSpecHash": "6v43m9W1PpFwCiB0YLMU4AEfa1ypQNtkuLzSTK2c3tHS6kRO4hPAU59mzJydoUZuiOGCoGGWOvHRVV2nhx5Hfw==",
   "success": true,
   "projectFilePath": "C:\\Users\\nepal\\OneDrive\\Desktop\\SEP3\\CanteenServiceDatabaseServer\\EFC\\EFC.csproj",
   "expectedPackageFiles": [
@@ -32,7 +32,10 @@
     "C:\\Users\\nepal\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\nepal\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\nepal\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
-    "C:\\Users\\nepal\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"
+    "C:\\Users\\nepal\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
+    "C:\\Users\\nepal\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.16\\microsoft.netcore.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\nepal\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.16\\microsoft.windowsdesktop.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\nepal\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.16\\microsoft.aspnetcore.app.ref.6.0.16.nupkg.sha512"
   ],
   "logs": []
 }

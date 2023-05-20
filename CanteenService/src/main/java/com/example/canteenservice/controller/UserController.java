@@ -1,5 +1,6 @@
 package com.example.canteenservice.controller;
 
+import com.example.canteenservice.dto.JwtTokenDTO;
 import com.example.canteenservice.dto.UserDTO;
 import com.example.canteenservice.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,11 @@ public class UserController {
     public ResponseEntity createUser(@RequestBody UserDTO userDTO) {
         try {
 
+            System.out.println("Create user controller" + userDTO);
             UserDTO addedUser = userService.createUser(userDTO);
             return ResponseEntity.ok(addedUser);
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseUtil.internalServerError(e);
         }
     }
@@ -32,6 +35,7 @@ public class UserController {
             UserDTO userFromServer = userService.getUserByUsername(username);
             return ResponseEntity.ok(userFromServer);
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseUtil.internalServerError(e);
         }
     }
@@ -39,9 +43,10 @@ public class UserController {
     @PostMapping(value = "/users/login")
     public ResponseEntity login(@RequestBody UserDTO userDTO) {
         try {
-         UserDTO token = userService.authenticateUser(userDTO);
-            return ResponseEntity.ok(token);
+            JwtTokenDTO jwtToken = userService.authenticateUser(userDTO);
+            return ResponseEntity.ok(jwtToken);
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseUtil.notFound(e);
         }
     }

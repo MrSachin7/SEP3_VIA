@@ -9,7 +9,7 @@ public class ResponseUtil {
         return new ResponseEntity(throwable.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public static ResponseEntity notFound(Exception e) {
+    public static ResponseEntity notFound(Throwable e) {
         return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 }

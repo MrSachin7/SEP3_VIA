@@ -1,22 +1,36 @@
 package com.example.canteenservice.services.impl;
 
+import com.example.canteenservice.dto.JwtTokenDTO;
 import com.example.canteenservice.dto.UserDTO;
 import com.example.canteenservice.grpc.clients.UserClient;
+import com.example.canteenservice.jwt.JwtUtils;
 import com.example.canteenservice.services.UserService;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserClient userClient;
 
-    public UserServiceImpl(UserClient userClient) {
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtils jwtUtils;
+
+    private final PasswordEncoder passwordEncoder;
+
+
+    public UserServiceImpl(UserClient userClient, AuthenticationManager authenticationManager, JwtUtils jwtUtils, PasswordEncoder passwordEncoder) {
         this.userClient = userClient;
+        this.authenticationManager = authenticationManager;
+        this.jwtUtils = jwtUtils;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public UserDTO createUser(UserDTO userDTO) {
-        userDTO.setPassword(hashPassword(userDTO.getPassword()));
+        userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         return userClient.createUser(userDTO);
     }
 
@@ -26,22 +40,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO authenticateUser(UserDTO userDTO) {
-        UserDTO userByUsername = getUserByUsername(userDTO.getUsername());
-        if (userByUsername == null) {
-            throw new RuntimeException("User not found");
-        }
-        if (!checkPassword(userDTO.getPassword(), userByUsername.getPassword())) {
-            throw new RuntimeException("Wrong password");
-        }
-        return userByUsername;
+    public JwtTokenDTO authenticateUser(UserDTO userDTO) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword())
+        );
+
+        UserDTO userByUsername = userClient.getUserByUsername(userDTO.getUsername());
+        String token = jwtUtils.generateToken(userByUsername);
+        JwtTokenDTO jwtTokenDTO = new JwtTokenDTO();
+        jwtTokenDTO.setToken(token);
+        return jwtTokenDTO;
     }
 
-    private String hashPassword(String plainTextPassword) {
-        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt(12));
-    }
-
-    private boolean checkPassword(String plainPassword, String hashedPassword) {
-        return BCrypt.checkpw(plainPassword, hashedPassword);
-    }
 }

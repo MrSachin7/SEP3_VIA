@@ -21,6 +21,7 @@ public class GRPCUserClient implements UserClient {
         UserOuterClass.User user =userConverter.toProto(userDTO);
         UserOuterClass.CreateUserRequest request = UserOuterClass.CreateUserRequest.newBuilder()
                 .setUser(user).build();
+        System.out.println("Sending request to create user");
         UserOuterClass.CreateUserResponse createdUserResponse = userServiceBlockingStub.createUser(request);
         return userConverter.toDto(createdUserResponse.getUser());
     }

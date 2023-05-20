@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "0+HA6VkIAoFIM0bQzRGdmpRRVTCLlUu/HQYdRcyULIEvfEbSlRdEvBWwUni+o2Qx7Cay1PvjjBR96bB5xsC4ig==",
+  "dgSpecHash": "yPrj0lNTZJ2hgNTd8PqkCdvZZIh6wsR0HGCYOpeKhNgaGIqZC2IWMN3UhetzKQdglbkdUbbXU7pOQI06HXVM2A==",
   "success": true,
   "projectFilePath": "C:\\Users\\nepal\\OneDrive\\Desktop\\SEP3\\CanteenServiceDatabaseServer\\Contracts\\Contracts.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\nepal\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.16\\microsoft.netcore.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\nepal\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.16\\microsoft.windowsdesktop.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\nepal\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.16\\microsoft.aspnetcore.app.ref.6.0.16.nupkg.sha512"
+  ],
   "logs": []
 }
