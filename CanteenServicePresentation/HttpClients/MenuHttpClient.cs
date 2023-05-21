@@ -9,7 +9,7 @@ public class MenuHttpClient : IMenuService {
     }
 
     public async Task<List<MenuDTO>> GetAllMenusAsync() {
-        return await HttpClientUtil.SendHttpGetRequest<MenuDTO, List<MenuDTO>>("menus");
+        return await HttpClientUtil.SendHttpGetRequestNoToken<MenuDTO, List<MenuDTO>>("menus");
     }
 
     public async Task<List<MenuDTO>> GetAllMenusByUserAsync(string username) {

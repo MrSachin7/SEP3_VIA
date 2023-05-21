@@ -24,7 +24,7 @@ public class ReservationClientImpl implements ReservationClient {
     @Override
     public ReservationDTO createReservation(CreateReservationDTO reservationDTO) {
         var request = ReservationOuterClass.CreateReservationRequest.newBuilder()
-                .setReservedByUsername(reservationDTO.getReservedByUsername())
+                .setReservedByUsername(reservationDTO.getReservedBy())
                 .setMenuId(reservationDTO.getMenuId())
                 .setQuantity(reservationDTO.getQuantity())
                 .build();

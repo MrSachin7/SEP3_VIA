@@ -2,12 +2,13 @@
 @inject NavigationManager NavigationManager
 @inject IMenuService MenuService;        
 @inject IReservationService ReservationService;    
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IAuthService AuthService;
 
 @using DTO
 @using Contracts
-@using System.Security.Claims
-
+@using System.Security.Claims 
+@using UIElements
 
 @if (_allMenus == null) {
     <p>
@@ -15,7 +16,12 @@
     </p>
 }
 else {
-    <button class="btn-outline-primary" @onclick="OpenCreateMenu"> Create Menu</button>
+    <AuthorizeView Policy="Admin">
+        <Authorized>
+            <button class="btn-outline-primary" @onclick="OpenCreateMenu"> Create Menu</button>
+        </Authorized>
+    </AuthorizeView>
+
     if (!_allMenus.Any()) {
         <p>
             <em> No menus available for now...</em>
@@ -30,7 +36,7 @@ else {
                             <div class="card-body">
                                 <span class="text-danger fw-bold fs-6"></span>
                                 <h4 class="card-title text-dark mt-2">@menu.Name</h4>
-                                <p class="card-text">@menu.Description</p>
+                                <p class="card-text text-dark">@menu.Description</p>
                                 <hr/>
                                 @if (menu.Ingredients != null && menu.Ingredients.Any()) {
                                     <p class="card-text text-dark">Ingredients : @string.Join(",", menu.Ingredients)</p>
@@ -39,23 +45,36 @@ else {
                                     <span>
                                         <small> @menu.Price kr</small>
                                     </span>
-                                    <span>
-                                        <input type="number" placeholder="quantity" @bind="_quantity"/>
-                                    </span>
-                                    <button class="btn btn-theme" @onclick="() => BookMenu(menu.Id)"> Book Menu</button>
+                                    <AuthorizeView Policy="Guest">
+                                        <Authorized>
+                                            <span>
+                                                <input type="number" placeholder="quantity" @onInput="HandleInput"/>
+                                            </span>
+                                            <button class="btn btn-theme" @onclick="() => BookMenu(menu.Id)"> Book Menu</button>
+                                        </Authorized>
+                                    </AuthorizeView>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         }
     }
-}
-
+    @if (_showModal) {
+        <Modal>
+            <p> Menu has been created successfully</p>
+            <div>
+                <button class="btn btn-theme" @onclick="CloseModal">Close</button>
+            </div>
+        </Modal>
+    }
 @code {
     private int _quantity = 1;
     private List<MenuDTO>? _allMenus;
+    private bool _showModal = false;
 
     protected override async Task OnInitializedAsync() {
         _allMenus = await MenuService.GetAllMenusAsync();
@@ -66,17 +85,41 @@ else {
     }
 
     private async Task BookMenu(int menuId) {
-        ClaimsPrincipal principal = await AuthService.GetAuthAsync();
-        if (principal.Identity!.IsAuthenticated) {
-            string username = principal.Identity.Name!;
-            await
-                ReservationService.CreateReservationAsync(new CreateReservationDTO() {
-                    Quantity = _quantity,
-                    MenuId = menuId,
-                    ReservedBy = username
-                });
+        try {
+            ClaimsPrincipal principal = await AuthService.GetAuthAsync();
+            AuthenticationState state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            string username =state.User.Claims.FirstOrDefault(claim => claim.Type.Equals("username"))!.Value.ToString();
+
+
+            if (principal.Identity!.IsAuthenticated) {
+                await
+                    ReservationService.CreateReservationAsync(new CreateReservationDTO() {
+                        Quantity = _quantity,
+                        MenuId = menuId,
+                        ReservedBy = username
+                    });
+                _showModal = true;
+            }
+        }
+        catch (Exception e) {
+            Console.WriteLine(e);
+            throw;
         }
     }
 
+    private void HandleInput(ChangeEventArgs e)
+    {
+        if (e.Value == null) {
+            _quantity = 1;
+        }
+        else {
+            _quantity = int.Parse(e.Value.ToString()!);
+        }
+    }
 
-}
+    private void CloseModal() {
+        _showModal = false;
+    }
+
+
+}}

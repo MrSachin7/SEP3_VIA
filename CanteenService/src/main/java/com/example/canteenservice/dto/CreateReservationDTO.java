@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CreateReservationDTO {
-    private String reservedByUsername;
+    private String reservedBy;
     private int menuId;
     private int quantity;
 

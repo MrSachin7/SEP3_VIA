@@ -22,10 +22,18 @@ public class UserServiceImpl implements UserService {
 
 
     public UserServiceImpl(UserClient userClient, AuthenticationManager authenticationManager, JwtUtils jwtUtils, PasswordEncoder passwordEncoder) {
+
         this.userClient = userClient;
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
         this.passwordEncoder = passwordEncoder;
+//        UserDTO userDTO = new UserDTO();
+//        userDTO.setUsername("admin");
+//        userDTO.setPassword(passwordEncoder.encode("admin"));
+//        userDTO.setRole("Admin");
+//        userClient.createUser(userDTO);
+
+
     }
 
     @Override
