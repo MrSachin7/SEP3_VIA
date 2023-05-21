@@ -18,6 +18,7 @@ public class MenuController {
     @PostMapping(value = "/menus")
     public ResponseEntity createMenu(@RequestBody MenuDTO menuDTO) {
         try {
+            System.out.println("Create menu controller" + menuDTO);
             MenuDTO addedMenu = menuServiceImpl.createMenu(menuDTO);
             return ResponseEntity.ok(addedMenu);
         } catch (Exception e) {
@@ -38,6 +39,7 @@ public class MenuController {
             }
             return ResponseEntity.ok(menuDTOS);
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseUtil.internalServerError(e);
         }
     }

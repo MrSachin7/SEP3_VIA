@@ -1,0 +1,82 @@
+﻿@page "/AllMenus"
+@inject NavigationManager NavigationManager
+@inject IMenuService MenuService;        
+@inject IReservationService ReservationService;    
+@inject IAuthService AuthService;
+
+@using DTO
+@using Contracts
+@using System.Security.Claims
+
+
+@if (_allMenus == null) {
+    <p>
+        <em>Hang tight. Loading latest menus for you...</em>
+    </p>
+}
+else {
+    <button class="btn-outline-primary" @onclick="OpenCreateMenu"> Create Menu</button>
+    if (!_allMenus.Any()) {
+        <p>
+            <em> No menus available for now...</em>
+        </p>
+    }
+    else {
+        @foreach (MenuDTO menu in _allMenus) {
+            <div class="container">
+                <div class="row g-3 mt-5 mb-5">
+                    <div class="col-md-9">
+                        <div class="card body">
+                            <div class="card-body">
+                                <span class="text-danger fw-bold fs-6"></span>
+                                <h4 class="card-title text-dark mt-2">@menu.Name</h4>
+                                <p class="card-text">@menu.Description</p>
+                                <hr/>
+                                @if (menu.Ingredients != null && menu.Ingredients.Any()) {
+                                    <p class="card-text text-dark">Ingredients : @string.Join(",", menu.Ingredients)</p>
+                                }
+                                <div class="mt-4 about d-flex text-dark justify-content-between align-items-center">
+                                    <span>
+                                        <small> @menu.Price kr</small>
+                                    </span>
+                                    <span>
+                                        <input type="number" placeholder="quantity" @bind="_quantity"/>
+                                    </span>
+                                    <button class="btn btn-theme" @onclick="() => BookMenu(menu.Id)"> Book Menu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}
+
+@code {
+    private int _quantity = 1;
+    private List<MenuDTO>? _allMenus;
+
+    protected override async Task OnInitializedAsync() {
+        _allMenus = await MenuService.GetAllMenusAsync();
+    }
+
+    private void OpenCreateMenu() {
+        NavigationManager.NavigateTo("/CreateMenu");
+    }
+
+    private async Task BookMenu(int menuId) {
+        ClaimsPrincipal principal = await AuthService.GetAuthAsync();
+        if (principal.Identity!.IsAuthenticated) {
+            string username = principal.Identity.Name!;
+            await
+                ReservationService.CreateReservationAsync(new CreateReservationDTO() {
+                    Quantity = _quantity,
+                    MenuId = menuId,
+                    ReservedBy = username
+                });
+        }
+    }
+
+
+}

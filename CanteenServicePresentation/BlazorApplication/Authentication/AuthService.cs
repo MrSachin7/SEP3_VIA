@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using System.Text.Json;
 using Contracts;
+using HttpClients;
 using Microsoft.JSInterop;
 
 namespace BlazorApplication.Authentication;
@@ -19,6 +20,7 @@ public class AuthService : IAuthService {
     public async Task LoginAsync(string username, string password) {
         var tokenDto = await _userService.LoginAsync(username, password);
         JwtToken = tokenDto.Token;
+        HttpClientUtil.AuthenticationToken = JwtToken;
         ClaimsPrincipal claimsPrincipal = CreateClaimsPrincipal();
         OnAuthStateChanged.Invoke(claimsPrincipal);
     }

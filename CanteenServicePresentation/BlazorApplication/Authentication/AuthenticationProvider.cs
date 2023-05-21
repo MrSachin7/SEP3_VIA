@@ -1,7 +1,6 @@
 ﻿using System.Security.Claims;
 using Contracts;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.JSInterop;
 
 namespace BlazorApplication.Authentication;
 
@@ -21,6 +20,7 @@ public class AuthenticationProvider : AuthenticationStateProvider {
 
     private void OnAuthStateChanged(ClaimsPrincipal claimsPrincipal) {
         NotifyAuthenticationStateChanged(
-            Task.FromResult(new AuthenticationState(claimsPrincipal)));
+            Task.FromResult(
+                new AuthenticationState(claimsPrincipal)));
     }
 }

@@ -1,0 +1,112 @@
+﻿@page "/CreateMenu"
+@inject IMenuService MenuService 
+@inject NavigationManager NavigationManager;
+@using DTO
+@using Contracts
+@using UIElements
+
+<div id="main-wrapper" class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-10">
+            <div class="card border-0">
+                <div class="card-body p-0">
+                    <div class="row no-gutters">
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="mb-5">
+                                    <h3 class="h4 font-weight-bold text-theme">Create a menu</h3>
+                                </div>
+                                <h6 class="h5 mb-0">Enter menu details</h6>
+
+                                <form>
+                                    <div class="form-group mt-3">
+                                        <label for="exampleInputEmail1">Menu name</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" @bind="_menuDto.Name">
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="exampleInputDescription">Menu Description</label>
+                                        <textarea class="form-control" @bind="_menuDto.Description" id="exampleInputDescription" name="text" placeholder="Description" rows="3"  ></textarea>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="exampleInputPrice">Price</label>
+                                        <input type="number" id="exampleInputPrice" class="form-control" @bind="_menuDto.Price">
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="exampleInputIngredients">Ingredients (* Seperate ingredients by ",")</label>
+                                        <textarea class="form-control" @bind="_imgredients" id="exampleInputIngredients" name="text" placeholder="Description" rows="3"  ></textarea>
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(errorLabel)) {
+                                        <div class="errorPrompt">
+                                            <label> @errorLabel</label>
+                                        </div>
+                                    }
+                                    <button type="button" class="btn btn-theme mt-3" @onclick="CreateMenuAsync">Create menu</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- end card -->
+
+            <p class="text-center mb-10">Already have an account? <a href="/Login" class="text-primary ml-1">Login</a></p>
+
+            <!-- end row -->
+
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- Row -->
+</div>
+@if (_showModal) {
+    <Modal>
+        <p> Menu has been created successfully</p>
+        <div>
+            <button class="btn btn-theme" @onclick="Proceed">Close</button>
+        </div>
+    </Modal>
+}
+
+
+@code {
+
+    private MenuDTO _menuDto = new MenuDTO();
+    private string _imgredients = string.Empty;
+    private string errorLabel = string.Empty;
+    private bool _showModal = false;
+
+    private async Task CreateMenuAsync() {
+        try {
+            FillAllMenuFields();
+            await MenuService.CreateMenuAsync(_menuDto);
+            _showModal = true;
+        }
+        catch (Exception e) {
+            Console.WriteLine(e);
+            errorLabel = $"Error : {e.Message}";
+        }
+    }
+
+    private void FillAllMenuFields() {
+        if ((!string.IsNullOrWhiteSpace(_menuDto.Name))) {
+            if (string.IsNullOrWhiteSpace(_imgredients)) {
+                _menuDto.Ingredients = new List<string>();
+            }
+            else {
+                _menuDto.Ingredients = _imgredients.Split(",")
+                    .Select(ingredient => ingredient.Trim()).ToList();
+            }
+        }
+        else {
+            throw new Exception("Required fields are not filled");
+        }
+    }
+
+    private void Proceed() {
+        _showModal = false;
+        NavigationManager.NavigateTo("/");
+    }
+
+}
