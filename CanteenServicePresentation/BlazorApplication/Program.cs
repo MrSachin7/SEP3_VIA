@@ -20,13 +20,13 @@ builder.Services.AddScoped<AuthenticationStateProvider, AuthenticationProvider>(
 builder.Services.AddScoped<IAuthService, AuthService>();
 // builder.Services.AddBlazoredSessionStorage();
 
-// builder.Services.AddAuthorization(options => {
-//     options.AddPolicy("Admin", policyBuilder => policyBuilder.RequireAuthenticatedUser().RequireClaim("Role", "Admin"));
-//     options.AddPolicy("Guest", policyBuilder => policyBuilder.RequireAuthenticatedUser().RequireClaim("Role", "Guest"));
-//     options.AddPolicy("All",
-//         policyBuilder => policyBuilder.RequireAuthenticatedUser().RequireClaim("Role", "Guest", "Admin"));
-//
-// });
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("Admin", policyBuilder => policyBuilder.RequireAuthenticatedUser().RequireClaim("Role", "Admin"));
+    options.AddPolicy("Guest", policyBuilder => policyBuilder.RequireAuthenticatedUser().RequireClaim("Role", "Guest"));
+    options.AddPolicy("All",
+        policyBuilder => policyBuilder.RequireAuthenticatedUser().RequireClaim("Role", "Guest", "Admin"));
+
+});
 
 // Add authentication with info about JWT
  builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

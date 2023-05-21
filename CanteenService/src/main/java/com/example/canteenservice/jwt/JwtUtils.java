@@ -2,6 +2,7 @@ package com.example.canteenservice.jwt;
 
 import com.example.canteenservice.dto.UserDTO;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -42,13 +43,17 @@ public class JwtUtils {
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256).compact();
     }
 
-    private Key getSignInKey() {
+    Key getSignInKey() {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET_KEY));
     }
 
     public boolean verifyToken(String token, UserDetails userDetails) {
-        final String username = getUsernameFromToken(token);
-        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+        try {
+            final String username = getUsernameFromToken(token);
+            return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+        } catch (ExpiredJwtException e) {
+            return false;
+        }
     }
     private boolean isTokenExpired(String token) {
         Claims parsed = parseToken(token);
@@ -63,5 +68,13 @@ public class JwtUtils {
     private Claims parseToken(String token) {
         return Jwts.parserBuilder().setSigningKey(getSignInKey()).build().parseClaimsJws(token).getBody();
 
+    }
+
+    public void setSECRET_KEY(String SECRET_KEY) {
+        this.SECRET_KEY = SECRET_KEY;
+    }
+
+    public void setEXPIRATION_TIME(long EXPIRATION_TIME) {
+        this.EXPIRATION_TIME = EXPIRATION_TIME;
     }
 }
