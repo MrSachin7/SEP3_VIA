@@ -6,6 +6,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+/**
+ * A class that implements the UserDetails interface.
+ * This class is used to get the user details from the token.
+ * We need this class because jwt expects a UserDetails object. Consider this as a wrapper class.
+ */
 public class UserDetailsImpl implements UserDetails {
 
     private UserDTO userDTO;

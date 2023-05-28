@@ -23,6 +23,15 @@ public class SecurityConfig {
         this.authenticationProvider = authenticationProvider;
     }
 
+    /**
+     * This method is responsible for configuring the security filter chain.
+     * It defines which endpoints are secured and which are not.
+     * It also defines which authentication provider is used.
+     * For eg: We exempt the /users/login endpoint from authentication.
+     * @param http
+     * @return
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http

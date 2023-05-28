@@ -14,9 +14,11 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
+/**
+ * This class is responsible for generating and verifying the token.
+ * A util class for JWT.
+ */
 @Component
 public class JwtUtils {
 
@@ -26,6 +28,11 @@ public class JwtUtils {
     @Value("${jwt.expiration}")
     private long EXPIRATION_TIME;
 
+    /**
+     * Generates a token for the user
+     * @param userDTO
+     * @return
+     */
     public String generateToken(UserDTO userDTO) {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 30);
@@ -47,6 +54,12 @@ public class JwtUtils {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET_KEY));
     }
 
+    /**
+     * Verifies if the token is valid
+     * @param token
+     * @param userDetails
+     * @return
+     */
     public boolean verifyToken(String token, UserDetails userDetails) {
         try {
             final String username = getUsernameFromToken(token);
@@ -60,6 +73,12 @@ public class JwtUtils {
         return parsed.getExpiration().before(new Date());
 
     }
+
+    /**
+     * Gets the username from the token
+     * @param token
+     * @return
+     */
     public String getUsernameFromToken(String token) {
         Claims parsed = parseToken(token);
         return parsed.getSubject();
@@ -70,11 +89,4 @@ public class JwtUtils {
 
     }
 
-    public void setSECRET_KEY(String SECRET_KEY) {
-        this.SECRET_KEY = SECRET_KEY;
-    }
-
-    public void setEXPIRATION_TIME(long EXPIRATION_TIME) {
-        this.EXPIRATION_TIME = EXPIRATION_TIME;
-    }
 }

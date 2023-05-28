@@ -12,6 +12,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * This class is responsible for creating beans for authentication and authorization.
+ * Just a factory class for creating beans in general.
+ */
 @Configuration
 public class SecurityBeanFactory {
     private final UserClient userClient;
