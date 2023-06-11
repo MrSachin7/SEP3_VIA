@@ -124,11 +124,12 @@ public static class HttpClientUtil {
 
         return responseContent;
     }
+
+    public enum RequestType {
+        GET,
+        POST,
+        PUT,
+        DELETE
+    }
 }
 
-public enum RequestType {
-    GET,
-    POST,
-    PUT,
-    DELETE
-}

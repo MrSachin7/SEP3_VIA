@@ -10,7 +10,7 @@ public class UserHttpClient : IUserService {
     }
 
     public async Task<UserDTO> GetUserAsync(string username) {
-        return await HttpClientUtil.SendHttpGetRequest<UserDTO, UserDTO>($"users/{username}");
+        return await HttpClientUtil2.SendHttpGetRequest<UserDTO>($"users/{username}");
     }
 
     
